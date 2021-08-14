@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const connect = () => {
   mongoose
     .connect("mongodb://localhost:27017/voyage", {
-      useNewUrlParser: true,
+      useNewUrlParser: true, //연결할 때 필요한 옵션들
       useUnifiedTopology: true,
       useCreateIndex: true,
       ignoreUndefined: true

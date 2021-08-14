@@ -67,54 +67,28 @@
       }
 
       function get_detail() {
-        let goods = [
-                {
-                    "_id": "600fa6e49539b288e3c5a2cf",
-                    "goodsId": 4,
-                    "name": "상품 4",
-                    "thumbnailUrl": "https://cdn.pixabay.com/photo/2016/09/07/02/11/frogs-1650657_1280.jpg",
-                    "category": "drink",
-                    "price": 0.1
-                },
-                {
-                    "_id": "600fa6e49539b288e3c5a2ce",
-                    "goodsId": 3,
-                    "name": "상품 3",
-                    "thumbnailUrl": "https://cdn.pixabay.com/photo/2016/09/07/02/12/frogs-1650658_1280.jpg",
-                    "category": "drink",
-                    "price": 2.2
-                },
-                {
-                    "_id": "600fa6e49539b288e3c5a2cd",
-                    "goodsId": 2,
-                    "name": "상품 2",
-                    "thumbnailUrl": "https://cdn.pixabay.com/photo/2014/08/26/19/19/wine-428316_1280.jpg",
-                    "category": "drink",
-                    "price": 0.11
-                },
-                {
-                    "_id": "600fa6e49539b288e3c5a2cc",
-                    "goodsId": 1,
-                    "name": "상품 1",
-                    "thumbnailUrl": "https://cdn.pixabay.com/photo/2016/09/07/19/54/wines-1652455_1280.jpg",
-                    "category": "drink",
-                    "price": 6.2
-                }
-            ]
+        $.ajax({
+          type: "GET",
+          url: `/api/goods/${goodsId}`,
+          data: {},
+          error: function(xhr, status, error) {
+            if (status == 404) {
+              alert("존재하지 않는 상품입니다.");
+            }
+            window.location.href = "/goods";
+          },
+          success: function(response) {
+            let goodsDetail = response["detail"];
+            $("#goodsUrl").attr("src", goodsDetail["thumbnailUrl"]);
+            $("#goodsName").text(goodsDetail["name"]);
+            $("#goodsPrice").text("$" + number2decimals(goodsDetail["price"]));
 
-        let goodsDetail = goods.find((v) => v.goodsId == goodsId);
-        if (!goodsDetail) {
-            goodsDetail = goods[0]
-        }
-        
-        $("#goodsUrl").attr("src", goodsDetail["thumbnailUrl"]);
-        $("#goodsName").text(goodsDetail["name"]);
-        $("#goodsPrice").text("$" + number2decimals(goodsDetail["price"]));
-
-        sessionStorage.setItem("goodsId", goodsId);
-        sessionStorage.setItem("goodsName", goodsDetail["name"]);
-        sessionStorage.setItem("goodsPrice", goodsDetail["price"]);
-        sessionStorage.setItem("orderNum", 1);
+            sessionStorage.setItem("goodsId", goodsId);
+            sessionStorage.setItem("goodsName", goodsDetail["name"]);
+            sessionStorage.setItem("goodsPrice", goodsDetail["price"]);
+            sessionStorage.setItem("orderNum", 1);
+          }
+        });
       }
 
       function addCart() {

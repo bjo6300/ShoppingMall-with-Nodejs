@@ -7,19 +7,31 @@ const connect = require('./schemas');
 connect();
 
 // 경로(goods, user)에 있는 router 파일을 가져온다.
-const goodsRouter = require('./routes/goods');
-const userRouter = require('./routes/user')
+// const goodsRouter = require('./routes/goods');
+// const userRouter = require('./routes/user')
+
+// TypeError: Cannot destructure property 'goodsId' of 'req.body' as it is undefined. 해결
+var bodyParser = require('body-parser')
+app.use(bodyParser.json())
+
+
+
+
+const goodsRouter = require("./routers/goods");
+app.use("/api", [goodsRouter]);
 
 // middleware로 url외에 다른 값들을 body로 가져온다.
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 //static으로 정적파일(동영상, 이미지 등) 제공
 app.use(express.static('public')) //public은 폴더명, http://localhost:3000/sample.png
 
 // 경로(goods, user)가 들어오면 라우터로 goods 경로에 있는 파일을을 연결해준다.
-app.use('/goods', goodsRouter)
-app.use('/user', userRouter)
+// app.use('/goods', goodsRouter)
+// app.use('/user', userRouter)
+
+
 
 
 // app.get('/goods/list', (req, res) => {
