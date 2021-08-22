@@ -11,8 +11,8 @@ connect();
 // const userRouter = require('./routes/user')
 
 // TypeError: Cannot destructure property 'goodsId' of 'req.body' as it is undefined. 해결
-var bodyParser = require('body-parser')
-app.use(bodyParser.json())
+// var bodyParser = require('body-parser')
+// app.use(bodyParser.json())
 
 
 
@@ -89,6 +89,16 @@ app.get('/home',(req, res, next)=>{ // http://localhost:3000/home
 //homework detail 페이지 구현
 app.get('/detail',(req, res, next)=>{ // http://localhost:3000/detail
   res.render('detail');
+})
+
+//cart
+app.get('/cart', (req, res) => {
+  res.render('cart');
+});
+
+//order
+app.get('/order', (req, res) => {
+  res.render('order')
 })
 
 //연결
