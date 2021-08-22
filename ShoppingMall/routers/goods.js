@@ -3,6 +3,7 @@ const Goods = require("../schemas/Goods");
 const Cart = require("../schemas/cart");
 const router = express.Router();
 
+
 // 상품 데이터 가져오기
 router.get("/goods", async (req, res, next) => {
   try {
@@ -54,13 +55,12 @@ router.get("/cart", async (req, res) => {
   });
 });
 
-//Cart 데이터 추가
+//Cart 데이터 mongodb에 추가
 router.post("/goods/:goodsId/cart", async (req, res) => {
   const { goodsId } = req.params;
   const { quantity } = req.body;
-  console.log('quantity', quantity);
 
-  isCart = await Cart.find({ goodsId }); // 카트에 있는지 조회
+  isCart = await Cart.find({ goodsId });
   console.log(isCart, quantity);
   if (isCart.length) {
     await Cart.updateOne({ goodsId }, { $set: { quantity } }); // 카트에 있으면 값을 갱신
@@ -91,7 +91,7 @@ router.patch("/goods/:goodsId/cart", async (req, res) => {
   isCart = await Cart.find({ goodsId });
   console.log(isCart, quantity);
   if (isCart.length) {
-    await Cart.updateOne({ goodsId }, { $set: { quantity } });
+    await Cart.updateOne({ goodsId }, { $set: { quantity } }); 
   }
 
   res.send({ result: "success" });
