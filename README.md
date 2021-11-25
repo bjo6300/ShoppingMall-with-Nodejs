@@ -10,7 +10,7 @@ shoppingmall with Node.js based on Sparta coding lectures
 ## 카테고리 2 - 음식
 ![image](https://user-images.githubusercontent.com/70627982/143397709-a773b506-55e5-4d0d-be6a-4b4834c0192a.png)
 
-## 상품 detail ex) 비빔면
+## 상품 detail
 ![image](https://user-images.githubusercontent.com/70627982/143397905-7114b4bf-b5b1-4dde-aa44-a1dd191ae16d.png)
 
 ## 장바구니 추가
